@@ -1,0 +1,345 @@
+openapi: 3.0.0
+info:
+  title: Proyek3
+  version: 1.0.0
+servers:
+  - url: https://backend-eight-phi-75.vercel.app
+  - url: http://localhost:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: auth
+  - name: Kategori
+  - name: Produk
+  - name: Payment
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - auth
+      summary: Registrasi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama: Difta
+                no_hp: '6285899443567'
+                email: difta@gmail.com
+                password: password123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/login:
+    post:
+      tags:
+        - auth
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: difta@gmail.com
+                password: password123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/kategori/create:
+    post:
+      tags:
+        - Kategori
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jenis_kategori: Kaos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/kategori/all:
+    get:
+      tags:
+        - Kategori
+      summary: All
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/kategori/{id}:
+    get:
+      tags:
+        - Kategori
+      summary: By Id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/kategori/update/{id}:
+    put:
+      tags:
+        - Kategori
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jenis_kategori: Dress
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/kategori/delete/{id}:
+    delete:
+      tags:
+        - Kategori
+      summary: Delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/produk/create:
+    post:
+      tags:
+        - Produk
+      summary: Create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                  example: Celana Jeans
+                deskripsi:
+                  type: string
+                  example: >-
+                    Celana Jeans untuk jalan jalan harian, bersantai, dan
+                    kegiatan sehari hari
+                file:
+                  type: string
+                  format: binary
+                nama_kategori:
+                  type: string
+                  example: Celana
+                qty:
+                  type: integer
+                  example: '10'
+                harga:
+                  type: integer
+                  example: '150000'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/produk/all:
+    get:
+      tags:
+        - Produk
+      summary: All
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/produk/{id}:
+    get:
+      tags:
+        - Produk
+      summary: By Id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/produk/update/{id}:
+    put:
+      tags:
+        - Produk
+      summary: Update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                  example: Kemeja Bermotif
+                deskripsi:
+                  type: string
+                  example: Kemeja Bermotif cocok untuk harian
+                nama_kategori:
+                  type: string
+                  example: Kemeja
+                file:
+                  type: string
+                  format: binary
+                qty:
+                  type: integer
+                  example: '20'
+                harga:
+                  type: integer
+                  example: '99999'
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/produk/delete/{id}:
+    delete:
+      tags:
+        - Produk
+      summary: Delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payment/create:
+    post:
+      tags:
+        - Payment
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_produk: 42
+                jumlah: 1
+                total_harga: 5000
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payment/notification:
+    post:
+      tags:
+        - Payment
+      summary: payment-notification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                transaction_status: settlement
+                order_id: TX-iU2m-TX-Q-PEXkWI
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payment/transactions:
+    get:
+      tags:
+        - Payment
+      summary: All
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/payment/transactions/{id}:
+    get:
+      tags:
+        - Payment
+      summary: By User Id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
