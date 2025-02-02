@@ -27,9 +27,9 @@ paths:
             schema:
               type: object
               example:
-                nama: Difta
-                no_hp: '6285899443567'
-                email: difta@gmail.com
+                nama: Miku Miku
+                no_hp: '6287872711343'
+                email: mikukum51@gmail.com
                 password: password123
       responses:
         '200':
@@ -47,8 +47,61 @@ paths:
             schema:
               type: object
               example:
-                email: difta@gmail.com
-                password: password123
+                email: kasyzzamy@gmail.com
+                password: admin123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/verify-otp:
+    post:
+      tags:
+        - auth
+      summary: verifikasi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: mikukum51@gmail.com
+                otp: 564841
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/request-reset-password:
+    post:
+      tags:
+        - auth
+      summary: request reset password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: kasyzzamy@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/reset-password:
+    post:
+      tags:
+        - auth
+      summary: reset-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: kasyzzamy@gmail.com
+                newPassword: raaykun123
       responses:
         '200':
           description: Successful response
@@ -65,7 +118,7 @@ paths:
             schema:
               type: object
               example:
-                jenis_kategori: Kaos
+                jenis_kategori: Pakaian Kasual
       security:
         - bearerAuth: []
       responses:
@@ -114,7 +167,7 @@ paths:
             schema:
               type: object
               example:
-                jenis_kategori: Dress
+                jenis_kategori: Pakaian Formal
       security:
         - bearerAuth: []
       parameters:
@@ -159,24 +212,24 @@ paths:
               properties:
                 nama:
                   type: string
-                  example: Celana Jeans
+                  example: Kaos Polo123
                 deskripsi:
                   type: string
                   example: >-
-                    Celana Jeans untuk jalan jalan harian, bersantai, dan
-                    kegiatan sehari hari
+                    Kaos Polo berwarna hitam untuk jalan jalan harian,
+                    bersantai, dan kegiatan sehari hari
+                nama_kategori:
+                  type: string
+                  example: Pakaian Kasual
                 file:
                   type: string
                   format: binary
-                nama_kategori:
-                  type: string
-                  example: Celana
                 qty:
                   type: integer
                   example: '10'
                 harga:
                   type: integer
-                  example: '150000'
+                  example: '50000'
       security:
         - bearerAuth: []
       responses:
@@ -214,6 +267,24 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /api/produk/kategori/{id}:
+    get:
+      tags:
+        - Produk
+      summary: By Category
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /api/produk/update/{id}:
     put:
       tags:
@@ -227,13 +298,13 @@ paths:
               properties:
                 nama:
                   type: string
-                  example: Kemeja Bermotif
+                  example: Kemeja Kasual
                 deskripsi:
                   type: string
-                  example: Kemeja Bermotif cocok untuk harian
+                  example: Kemeja bermotif kasual cocok untuk harian
                 nama_kategori:
                   type: string
-                  example: Kemeja
+                  example: Pakaian Kasual
                 file:
                   type: string
                   format: binary
@@ -242,7 +313,7 @@ paths:
                   example: '20'
                 harga:
                   type: integer
-                  example: '99999'
+                  example: '79999'
       security:
         - bearerAuth: []
       parameters:
@@ -307,7 +378,7 @@ paths:
               type: object
               example:
                 transaction_status: settlement
-                order_id: TX-iU2m-TX-Q-PEXkWI
+                order_id: TX-NJii-TX-D7bO4yPv
       responses:
         '200':
           description: Successful response
